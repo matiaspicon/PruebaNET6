@@ -14,21 +14,15 @@ namespace PruebaNET6.Controllers
         public IActionResult Login(string ID)
         {
 
-            WCFUsuarioLogeado? user = null;
-
             if (!User.Identity.IsAuthenticated)
             {
-                user = LoginService.LoginUniversalCallback(ID);
+
+                var user = LoginService.LoginUniversalCallback(ID);
 
                 if (user == null)
                 {
                     return Redirect(LoginService.GetURLLoginUniversal());
                 }
-            }
-
-
-            if (user != null)
-            {               
 
                 ClaimsIdentity identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
 
@@ -42,18 +36,18 @@ namespace PruebaNET6.Controllers
                 identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
 
                 // Lo utilizaremos cuando querramos mostrar el nombre del usuario logueado en el sistema.
-                identity.AddClaim(new Claim(ClaimTypes.GivenName, user.NombrePersona + user.ApellidoPersona));
+                identity.AddClaim(new Claim(ClaimTypes.GivenName, user.NombrePersona + " " + user.ApellidoPersona));
 
                 ClaimsPrincipal principal = new ClaimsPrincipal(identity);
 
                 // En este paso se hace el login del usuario al sistema
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal).Wait();
 
-                return RedirectToAction(nameof(HomeController.Index), "Home");
                 
-            }            
+            }
 
-            return View();
+            //Redirrecionar al home
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
     }
 }

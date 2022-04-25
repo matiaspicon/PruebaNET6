@@ -10,10 +10,4 @@
     <PackageReference Include="FrameworkMVC" Version="1.1.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="FrameworkMVC">
-      <HintPath>..\..\matiaspicon\FrameworkMVC\FrameworkMVC\bin\Release\net6.0\FrameworkMVC.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>

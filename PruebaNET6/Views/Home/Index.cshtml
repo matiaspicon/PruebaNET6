@@ -3,6 +3,44 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Datos del usuario</h1> 
+    
+    @if(User.Identity.IsAuthenticated){
+
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>
+                    Tipo de Claim
+                    </th>
+                    <th>
+                        Tipo de Valor
+                    </th>
+                    <th>
+                        Valor
+                    </th>
+                </tr>                
+            </thead>
+            <tbody>
+                @foreach(var claim in User.Claims)
+                {
+                    <tr>
+                        <td>
+                            @claim.Type
+                        </td>
+                        <td>
+                            @claim.ValueType
+                        </td>
+                        <td>
+                            @claim.Value
+                        </td>
+                    </tr>                        
+                }
+            </tbody>
+        </table>
+        
+
+    }
+
+
 </div>

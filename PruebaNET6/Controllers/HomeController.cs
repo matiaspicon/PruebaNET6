@@ -14,12 +14,13 @@ namespace PruebaNET6.Controllers
             _logger = logger;
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             return View();
         }
 
+        [Authorize(Roles = "OTRO")]
         public IActionResult Privacy()
         {
             return View();
